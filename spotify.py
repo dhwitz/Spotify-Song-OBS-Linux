@@ -15,4 +15,4 @@ while(True):
     # To just print the title
     print(metadata['xesam:title'])
 
-    time.sleep(10)
+    time.sleep(5)
