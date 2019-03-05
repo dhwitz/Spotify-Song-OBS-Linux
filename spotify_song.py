@@ -1,14 +1,10 @@
 """
-
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
-
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
-
 @author David E. Horowitz
-
 """
 
 #[Imports]
@@ -34,12 +30,14 @@ def current_song():
     if not session_bus or not spotify_bus or not spotify_prop:
         create_values()
     metadata = spotify_prop.Get("org.mpris.MediaPlayer2.Player", "Metadata")
-    return metadata.get("xesam:title", "Spotify Not Found!")
-
+    return metadata
+    
 def main():
     # single threaded application
     while True:
-        print(current_song())
+        with open('spotify.txt', 'w') as the_file:
+            the_file.write("'" + current_song()["xesam:title"] +"' - " 
+                + current_song()["xesam:artist"][0])
         time.sleep(5)
 
 if __name__ == "__main__":
